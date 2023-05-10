@@ -13,7 +13,10 @@ function Racoon({size, niceColor, name}) {
 
             <h2 className="red" style={{
                 fontSize: size + 'px',
-                color: niceColor
+                color: niceColor,
+                display: 'block',
+                // font-size
+
             }}
             >
                 Rac
