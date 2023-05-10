@@ -1,5 +1,7 @@
 import './App.scss';
-import Dogs from './Components/005/Dogs';
+import './buttons.scss';
+import Buttons from './Components/005/Buttons';
+
 
 function App() {
 
@@ -7,7 +9,7 @@ function App() {
     <div className="App">
       <header className="App-header">
 
-        <Dogs />
+        <Buttons />
 
       </header>
     </div>
