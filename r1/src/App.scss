@@ -68,3 +68,44 @@ h2 {
         border-radius: 10px;
     }
 }
+
+fieldset {
+    margin: 20px;
+    border: 1px dashed skyblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    legend {
+        color: skyblue;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+    }
+    button {
+        margin: 0 10px 0 30px;
+    }
+    input[type="text"] {
+        border: none;
+        outline: none;
+        font-size: 30px;
+        background-color: skyblue;
+        color: white;
+        border-radius: 5px;
+        padding: 5px;
+        margin: 5px;
+    }
+    input[type="range"] {
+        width: 375px;
+    }
+    select {
+        border: none;
+        outline: none;
+        font-size: 30px;
+        background-color: skyblue;
+        color: white;
+        border-radius: 5px;
+        padding: 5px;
+        margin: 5px;
+        width: 375px;
+    }
+}
