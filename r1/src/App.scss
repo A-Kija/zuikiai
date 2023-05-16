@@ -180,3 +180,34 @@ fieldset {
         margin: 5px;
     }
 }
+
+.messages {
+    position: fixed;
+    top: 40px;
+    right: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    .message {
+        padding: 15px 30px;
+        border: 1px solid $gray;
+        background-color: lighten($gray, 10%);
+        border-radius: 3px;
+        font-size: 20px;
+        &.ok {
+            border-color: $yellow;
+            background-color: lighten($yellow, 10%);
+            color: white;
+        }
+        &.info {
+            border-color: $blue;
+            background-color: lighten($blue, 10%);
+            color: white;
+        }
+        &.error {
+            border-color: $red;
+            background-color: lighten($red, 10%);
+            color: white;
+        }
+    }
+}

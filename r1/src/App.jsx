@@ -7,20 +7,21 @@ import { crudCreate, crudDelete, crudEdit, crudRead } from './Functions/localSto
 import List from './Components/crud/List';
 import Delete from './Components/crud/Delete';
 import Edit from './Components/crud/Edit';
+import Messages from './Components/crud/Messages';
+import { v4 as uuidv4 } from 'uuid';
 
 const KEY = 'myFancyColors';
 
 export default function App() {
 
     const [listUpdate, setListUpdate] = useState(Date.now());
-
     const [colors, setColors] = useState(null);
-
     const [createData, setCreateData] = useState(null);
     const [deleteModalData, setDeleteModalData] = useState(null);
     const [deleteData, setDeleteData] = useState(null);
     const [editModalData, setEditModalData] = useState(null);
     const [editData, setEditData] = useState(null);
+    const [messages, setMessages] = useState([]);
 
     //R read
     useEffect(_ => {
@@ -34,6 +35,7 @@ export default function App() {
         }
         crudCreate(KEY, createData);
         setListUpdate(Date.now());
+        msg('New color was creates', 'ok');
     }, [createData]);
 
     //U update
@@ -43,16 +45,29 @@ export default function App() {
         }
         crudEdit(KEY, editData, editData.id);
         setListUpdate(Date.now());
+        msg('Color was edited', 'ok');
     }, [editData]);
 
-    //D dreate
+    //D deleate
     useEffect(_ => {
         if (null === deleteData) {
             return;
         }
         crudDelete(KEY, deleteData.id);
         setListUpdate(Date.now());
+        msg('Color has gone', 'ok');
     }, [deleteData]);
+
+    const msg = (text, type) => {
+        const id = uuidv4();
+        const message = {
+            id,
+            text,
+            type
+        }
+        setMessages(m => [...m, message]);
+        setTimeout(_=> setMessages(m => m.filter(m => m.id !== id)), 5000);
+    }
 
     return (
         <>
@@ -80,6 +95,7 @@ export default function App() {
                 setEditModalData={setEditModalData}
                 setEditData={setEditData}
             />
+            <Messages messages={messages} />
         </>
     );
 
