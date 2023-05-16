@@ -1,5 +1,5 @@
 @import './variables.module.scss';
-button {
+button:not(.btn) {
     background-color: $gray;
     border-radius: 12px;
     color: white;

@@ -1,8 +1,13 @@
-import { useState } from "react"
+import { useState } from 'react';
 
-export default function Create() {
+export default function Create({ setCreateData }) {
 
     const [color, setColor] = useState('#ffffff');
+
+    const save = _ => {
+        setCreateData({ color });
+        setColor('#ffffff');
+    }
 
     return (
         <div className="card m-5">
@@ -15,7 +20,7 @@ export default function Create() {
                     <input type="color" className="form-control form-control-color" value={color} onChange={e => setColor(e.target.value)} title="Choose your color" />
                 </div>
 
-                <button className="yellow">Save Color</button>
+                <button className="yellow" onClick={save}>Save Color</button>
             </div>
         </div>
     )
