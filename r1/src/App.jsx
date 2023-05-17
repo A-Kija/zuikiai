@@ -24,10 +24,13 @@ export default function App() {
     const [editModalData, setEditModalData] = useState(null);
     const [editData, setEditData] = useState(null);
     const [messages, setMessages] = useState([]);
+    const [sort, setSort] = useState('default');
+    const [filter, setFilter] = useState('');
+
 
     //R read
     useEffect(_ => {
-        setColors(crudRead(KEY));
+        setColors(crudRead(KEY).map((c, i) => ({...c, row: i, show: true})));
     }, [listUpdate]);
 
     //C create
@@ -36,12 +39,12 @@ export default function App() {
             return;
         }
         axios.get(API + createData.color.substring(1))
-        .then(res => {
-            createData.title = res.data.name.value;
-            crudCreate(KEY, createData);
-            setListUpdate(Date.now());
-            msg('New color was creates', 'ok');
-        });
+            .then(res => {
+                createData.title = res.data.name.value;
+                crudCreate(KEY, createData);
+                setListUpdate(Date.now());
+                msg('New color was creates', 'ok');
+            });
 
     }, [createData]);
 
@@ -51,12 +54,12 @@ export default function App() {
             return;
         }
         axios.get(API + editData.color.substring(1))
-        .then(res => {
-            editData.title = res.data.name.value;
-            crudEdit(KEY, editData, editData.id);
-            setListUpdate(Date.now());
-            msg('Color was edited', 'ok');
-        });
+            .then(res => {
+                editData.title = res.data.name.value;
+                crudEdit(KEY, editData, editData.id);
+                setListUpdate(Date.now());
+                msg('Color was edited', 'ok');
+            });
     }, [editData]);
 
     //D deleate
@@ -69,6 +72,23 @@ export default function App() {
         msg('Color has gone', 'ok');
     }, [deleteData]);
 
+    useEffect(() => {
+        if (sort === 'default') {
+            setColors(c => [...c].sort((a, b) => a.row - b.row));
+        } else if(sort === 'up') {
+            setColors(c => [...c].sort((a, b) => a.title.localeCompare(b.title)));
+        } else {
+            setColors(c => [...c].sort((b, a) => a.title.localeCompare(b.title)));
+        }
+
+    }, [sort]);
+
+    useEffect(() => {
+
+        setColors(c => c.map(c => c.title.toLowerCase().search(filter.toLowerCase()) !== -1) ? {...c, show: true} : {...c, show: false})
+
+    }, [filter]);
+
     const msg = (text, type) => {
         const id = uuidv4();
         const message = {
@@ -77,8 +97,20 @@ export default function App() {
             type
         }
         setMessages(m => [...m, message]);
-        setTimeout(_=> setMessages(m => m.filter(m => m.id !== id)), 5000);
+        setTimeout(_ => setMessages(m => m.filter(m => m.id !== id)), 5000);
     }
+
+    const doSort = _ => {
+        setSort(s => {
+            switch (s) {
+                case 'default': return 'up';
+                case 'up': return 'down';
+                default: return 'default'
+            }
+        });
+    }
+
+
 
     return (
         <>
@@ -92,6 +124,10 @@ export default function App() {
                             colors={colors}
                             setDeleteModalData={setDeleteModalData}
                             setEditModalData={setEditModalData}
+                            sort={sort}
+                            doSort={doSort}
+                            filter={filter}
+                            setFilter={setFilter}
                         />
                     </div>
                 </div>

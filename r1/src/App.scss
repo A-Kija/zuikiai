@@ -217,3 +217,30 @@ fieldset {
         }
     }
 }
+
+.list-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    .sort-button {
+        width: 30px;
+        height: 30px;
+        background-color: $blue;
+        color: white;
+        display: flex;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        &:after {
+            content: '\25B2';
+            font-size: 26px;
+        }
+        &.default::after {
+            content: 'S';
+            font-weight: bold;
+        }
+        &.down::after {
+            transform: rotate(180deg);
+        }
+    }
+}
