@@ -19,6 +19,7 @@ export default function List({ colors, setDeleteModalData, setEditModalData, doS
             </h5>
             <div className="card-body">
                 <ul className="list-group list-group-flush">
+                    {console.log(colors)}
                     {
                         colors
                             ? colors.length

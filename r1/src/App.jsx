@@ -85,7 +85,7 @@ export default function App() {
 
     useEffect(() => {
 
-        setColors(c => c.map(c => c.title.toLowerCase().search(filter.toLowerCase()) !== -1) ? {...c, show: true} : {...c, show: false})
+        setColors(c => c.map(c => c.title.toLowerCase().search(filter.toLowerCase()) !== -1 ? {...c, show: true} : {...c, show: false}))
 
     }, [filter]);
 
