@@ -9,8 +9,10 @@ import Delete from './Components/crud/Delete';
 import Edit from './Components/crud/Edit';
 import Messages from './Components/crud/Messages';
 import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
 
 const KEY = 'myFancyColors';
+const API = 'https://www.thecolorapi.com/id?hex=';
 
 export default function App() {
 
@@ -33,9 +35,14 @@ export default function App() {
         if (null === createData) {
             return;
         }
-        crudCreate(KEY, createData);
-        setListUpdate(Date.now());
-        msg('New color was creates', 'ok');
+        axios.get(API + createData.color.substring(1))
+        .then(res => {
+            createData.title = res.data.name.value;
+            crudCreate(KEY, createData);
+            setListUpdate(Date.now());
+            msg('New color was creates', 'ok');
+        });
+
     }, [createData]);
 
     //U update
@@ -43,9 +50,13 @@ export default function App() {
         if (null === editData) {
             return;
         }
-        crudEdit(KEY, editData, editData.id);
-        setListUpdate(Date.now());
-        msg('Color was edited', 'ok');
+        axios.get(API + editData.color.substring(1))
+        .then(res => {
+            editData.title = res.data.name.value;
+            crudEdit(KEY, editData, editData.id);
+            setListUpdate(Date.now());
+            msg('Color was edited', 'ok');
+        });
     }, [editData]);
 
     //D deleate

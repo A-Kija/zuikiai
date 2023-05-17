@@ -1,11 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function Create({ setCreateData }) {
 
     const [color, setColor] = useState('#ffffff');
 
+    const ci = useRef();
+
+    useEffect(() => {
+        ci.current.focus();
+    }, []);
+
     const save = _ => {
-        setCreateData({ color });
+        setCreateData({ color, title: 'No name'});
         setColor('#ffffff');
     }
 
@@ -17,7 +23,7 @@ export default function Create({ setCreateData }) {
 
                 <div className="m-3">
                     <label className="form-label">Color picker</label>
-                    <input type="color" className="form-control form-control-color" value={color} onChange={e => setColor(e.target.value)} title="Choose your color" />
+                    <input type="color" ref={ci} className="form-control form-control-color" value={color} onChange={e => setColor(e.target.value)} title="Choose your color" />
                 </div>
 
                 <button className="yellow" onClick={save}>Save Color</button>
