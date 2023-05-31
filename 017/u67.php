@@ -12,7 +12,6 @@ for ($i = 0; $i < $size; $i++) {
     $all = $small;
 }
 
-
 echo '<pre>';
 
 print_r($all);
