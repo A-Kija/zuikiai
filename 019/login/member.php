@@ -21,5 +21,6 @@ if (!isset($_SESSION['name'])) {
 </head>
 <body>
     <h1 style="color:skyblue;">Member Page</h1>
+    <?php require __DIR__ . '/menu.php' ?>
 </body>
 </html>

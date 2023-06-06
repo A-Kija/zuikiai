@@ -1,7 +1,23 @@
 <?php
 session_start();
 
+
+if (isset($_SESSION['name']) && !isset($_GET['logout'])) {
+    header('Location: http://localhost/zuikiai/019/login/');
+    die;
+}
+
+
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    if (isset($_GET['logout'])) {
+        unset($_SESSION['name']);
+        $_SESSION['error'] = 'Logged out';
+        header('Location: http://localhost/zuikiai/019/login/login.php');
+        die;
+    }
+
 
     $users = file_get_contents(__DIR__ . '/users.json');
     $users = json_decode($users, 1);
@@ -25,14 +41,7 @@ if (isset($_SESSION['error'])) {
 else {
     $error = '';
 }
-
-
-
-
-
-
 ?>
-
 
 
 
@@ -46,9 +55,7 @@ else {
 </head>
 <body>
     <h1>Login Page</h1>
-    <h2>
-        <a href="http://localhost/zuikiai/019/login/">home</a>
-    </h2>
+
     <?php if ($error) : ?>
         <h3 style="color:crimson;"><?= $error ?></h3>
     <?php endif ?>
