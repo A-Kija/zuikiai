@@ -6,9 +6,22 @@
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        $colors = array_map(function($c) use($id ) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'https://www.thecolorapi.com/id?hex='.str_replace('#', '', $_POST['color']));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    
+        $output = curl_exec($ch);
+    
+        $output = json_decode($output, 1);
+    
+        $name = $output['name']['value'];
+    
+        curl_close($ch);  
+
+        $colors = array_map(function($c) use($id, $name) {
             if ($c['id'] == $id) {
                 $c['color'] = $_POST['color'];
+                $c['name'] = $name;
             }
             return $c;
         }, $colors);

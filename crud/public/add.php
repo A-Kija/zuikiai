@@ -3,8 +3,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $colors = file_get_contents(__DIR__ . '/../colors.ser');
     $colors = $colors ? unserialize($colors) : [];
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'https://www.thecolorapi.com/id?hex='.str_replace('#', '', $_POST['color']));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+    $output = curl_exec($ch);
+
+    $output = json_decode($output, 1);
+
+    $name = $output['name']['value'];
+
+    curl_close($ch);  
+
+
+
     $colors[] = [
         'color' => $_POST['color'],
+        'name' => $name,
         'id' => rand(100000000, 999999999)
     ];
     $colors = serialize($colors);

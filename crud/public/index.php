@@ -28,7 +28,7 @@
                     <?php foreach ($colors as $color) : ?>
                         <li class="list-group-item">
                             <div class="bin">
-                                <div class="color-block" style="background:<?= $color['color'] ?>;"><?= $color['color'] ?></div>
+                                <div class="color-block" style="background:<?= $color['color'] ?>;"><?= $color['name'] ?></div>
                                 <form action="./delete.php?id=<?= $color['id'] ?>" method="post">
                                     <button type="submit" class="delete"></button>
                                 </form>
