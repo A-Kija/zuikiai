@@ -3,7 +3,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $colors = file_get_contents(__DIR__ . '/../colors.ser');
     $colors = $colors ? unserialize($colors) : [];
-    $colors[] = $_POST['color'];
+    $colors[] = [
+        'color' => $_POST['color'],
+        'id' => rand(100000000, 999999999)
+    ];
     $colors = serialize($colors);
     file_put_contents(__DIR__ . '/../colors.ser', $colors);
     header('Location: ./');
@@ -36,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <h2>Add new color</h2>
                     </div>
                     <div class="card-body">
-                        <form action="" method="post">
+                        <form action="./add.php" method="post">
                         <label class="form-label">Color picker</label>
                         <input type="color" class="form-control form-control-color" name="color" title="Choose your color">
                         <button type="submit" class="btn btn-outline-warning mt-4">Save</button>

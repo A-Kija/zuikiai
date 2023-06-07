@@ -11982,9 +11982,75 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
-h1, .h1 {
-  color: crimson;
+.bin {
+  position: relative;
 }
-h1 span, .h1 span {
-  color: pink;
+.bin .color-block {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  margin: 10px 0;
+  color: white;
+  font-size: 22px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-family: monospace;
+}
+.bin button {
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: absolute;
+  height: 32px;
+  width: 32px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.3137254902);
+  border-radius: 50%;
+}
+.bin button.delete {
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+.bin button.delete::after {
+  content: "×";
+  color: crimson;
+  font-size: 30px;
+  line-height: 25px;
+  height: 30px;
+  width: 30px;
+}
+.bin a {
+  display: block;
+  position: absolute;
+  height: 32px;
+  width: 32px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.3137254902);
+  border-radius: 50%;
+  text-decoration: none;
+}
+.bin a.edit {
+  top: 10px;
+  right: 50px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+.bin a.edit::after {
+  content: "✎";
+  color: darkcyan;
+  font-size: 20px;
+  line-height: 25px;
+  height: 30px;
+  width: 30px;
 }
