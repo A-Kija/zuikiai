@@ -12054,3 +12054,8 @@ textarea.form-control-lg {
   height: 30px;
   width: 30px;
 }
+
+.navbar-brand img {
+  width: 200px;
+  height: auto;
+}
