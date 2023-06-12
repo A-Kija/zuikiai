@@ -38,4 +38,3 @@ echo $ufo1->destination;
 echo '<br>';
 var_dump($ufo1);
 var_dump($ufo2);
-
