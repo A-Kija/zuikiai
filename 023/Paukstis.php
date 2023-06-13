@@ -1,6 +1,6 @@
 <?php
 
-class Paukstis {
+class Paukstis extends Miskas {
 
 
     public $name, $age;
@@ -13,13 +13,12 @@ class Paukstis {
 
     public function fly() : void
     {
-        echo '<h1>'.$this->name.' Skrenda skrenda</h1>';
+        echo '<h1>'.$this->name.' Skrenda skrenda '.$this->color.'</h1>';
     }
 
-    
     public function getArea() : string
     {
-        return 'Miško dydis yra: '. rand(10,99);
+        return 'Aš karvelis gyvenu mieste';
     }
 
 }
