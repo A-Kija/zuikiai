@@ -1,7 +1,5 @@
 <?php
 
-
-
 class H1WithRandomColor extends AddH1 implements H1, Color {
 
     const COLOR1 = 'black';
