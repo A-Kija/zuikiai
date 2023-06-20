@@ -1,0 +1,19 @@
+{
+    "name": "miskas/didelis",
+    "description": "Apie miska ir misko zveris",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Miskas\\Didelis\\": "src/",
+            "Miskas\\Didelis\\Grybu\\Laukas\\": "src/",
+            "Sodas\\Darzas\\": "app/"        
+        }
+    },
+    "authors": [
+        {
+            "name": "Briedis",
+            "email": "briedis@gmail.com"
+        }
+    ],
+    "require": {}
+}

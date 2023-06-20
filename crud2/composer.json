@@ -1,0 +1,17 @@
+{
+    "name": "colors/crud2",
+    "description": "Colors CRUD with OOP",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Colors\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "A-Kija",
+            "email": "arvydas.kijakauskas@gmail.com"
+        }
+    ],
+    "require": {}
+}
