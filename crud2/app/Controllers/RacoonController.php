@@ -2,10 +2,16 @@
 
 namespace Colors\Controllers;
 
+use Colors\App;
+use Colors\FileWriter;
+
+
 class RacoonController
 {
     public function index()
     {
+        $data = new FileWriter;
+        
         echo '<h1>RacoonController</h1>';
     }
 

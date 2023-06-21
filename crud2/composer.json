@@ -4,7 +4,8 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Colors\\": "app/"
+            "Colors\\": "app/",
+            "App\\DB\\": "app/"
         }
     },
     "authors": [
