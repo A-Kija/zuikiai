@@ -14,5 +14,7 @@
             "email": "arvydas.kijakauskas@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "ramsey/uuid": "^4.7"
+    }
 }
