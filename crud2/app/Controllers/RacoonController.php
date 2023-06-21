@@ -10,9 +10,12 @@ class RacoonController
 {
     public function index()
     {
-        $data = new FileWriter;
+        $data = new FileWriter('racoon');
         
-        echo '<h1>RacoonController</h1>';
+        return App::view('racoon/index', [
+            'pageTitle' => 'Racoons list',
+            'racoons' => $data->showAll(),
+        ]);
     }
 
     public function show(int $id)
