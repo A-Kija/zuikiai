@@ -44,5 +44,30 @@ class RacoonController
         ]);
     }
 
+    public function update(int $id, array $request)
+    {
+        $data = new FileWriter('racoon');
+        $data->update($id, $request);
+
+        header('Location: /racoon');
+    }
+
+    public function delete(int $id)
+    {
+        $racoon = (new FileWriter('racoon'))->show($id);
+        return App::view('racoon/delete', [
+            'pageTitle' => 'Confirm racoon delete',
+            'racoon' => $racoon,
+        ]);
+    }
+
+    public function destroy(int $id)
+    {
+        $data = new FileWriter('racoon');
+        $data->delete($id);
+
+        header('Location: /racoon');
+    }
+
 
 }

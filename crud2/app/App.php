@@ -34,24 +34,17 @@ class App {
         else if($_SERVER['REQUEST_METHOD'] == 'GET' && count($url) == 3 && $url[0] == 'racoon' && $url[1] == 'edit') {
             return (new RacoonController)->edit($url[2]);
         }
+        else if($_SERVER['REQUEST_METHOD'] == 'POST' && count($url) == 3 && $url[0] == 'racoon' && $url[1] == 'update') {
+            return (new RacoonController)->update($url[2], $_POST);
+        }
+        else if($_SERVER['REQUEST_METHOD'] == 'GET' && count($url) == 3 && $url[0] == 'racoon' && $url[1] == 'delete') {
+            return (new RacoonController)->delete($url[2]);
+        }
+        else if($_SERVER['REQUEST_METHOD'] == 'POST' && count($url) == 3 && $url[0] == 'racoon' && $url[1] == 'destroy') {
+            return (new RacoonController)->destroy($url[2]);
+        }
 
 
-
-        // else if($_SERVER['REQUEST_METHOD'] == 'POST' && count($url) == 3 && $url[0] == 'racoon' && $url[1] == 'update') {
-        //     return (new RacoonController)->update($url[2], $_POST);
-        // }
-        // else if($_SERVER['REQUEST_METHOD'] == 'POST' && count($url) == 3 && $url[0] == 'racoon' && $url[1] == 'delete') {
-        //     return (new RacoonController)->delete($url[2]);
-        // }
-        // else if($_SERVER['REQUEST_METHOD'] == 'GET' && count($url) == 2 && $url[0] == 'racoon' && $url[1] == 'show') {
-        //     return (new RacoonController)->show($url[2]);
-        // }
-        // else if($_SERVER['REQUEST_METHOD'] == 'GET' && count($url) == 2 && $url[0] == 'racoon' && $url[1] == 'show') {
-        //     return (new RacoonController)->show($url[2]);
-        // }
-        // else if($_SERVER['REQUEST_METHOD'] == 'GET' && count($url) == 2 && $url[0] == 'racoon' && $url[1] == 'show') {
-        //     return (new RacoonController)->show($url[2]);
-        // }
 
 
 

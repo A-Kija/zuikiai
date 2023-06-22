@@ -6,5 +6,6 @@
     <h2><?= $racoon['name'] ?></h2>
     <p><?= $racoon['description'] ?></p>
     <a href="/racoon/edit/<?= $racoon['id'] ?>">Edit</a>
+    <a href="/racoon/delete/<?= $racoon['id'] ?>">Delete</a>
 <?php endforeach ?>
 <?php endif ?>
