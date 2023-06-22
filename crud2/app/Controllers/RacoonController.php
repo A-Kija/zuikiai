@@ -18,6 +18,21 @@ class RacoonController
         ]);
     }
 
+    public function create()
+    {
+        return App::view('racoon/create', [
+            'pageTitle' => 'Create racoon',
+        ]);
+    }
+
+    public function store(array $request)
+    {
+        $data = new FileWriter('racoon');
+        $data->create($request);
+
+        header('Location: /racoon');
+    }
+
     public function show(int $id)
     {
         echo '<h1>RacoonController</h1>';
