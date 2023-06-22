@@ -3,7 +3,7 @@
 namespace Colors;
 
 use App\DB\DataBase;
-use Ramsey\Uuid\Uuid;
+// use Ramsey\Uuid\Uuid;
 
 class FileWriter implements DataBase
 {
@@ -29,7 +29,8 @@ class FileWriter implements DataBase
     
     public function create(array $userData) : void
     {
-        $id = Uuid::uuid4()->toString();
+        // $id = Uuid::uuid4()->toString();
+        $id = rand(100000000, 999999999);
         $userData['id'] = $id;
         $this->data[] = $userData;
     }

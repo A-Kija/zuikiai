@@ -33,10 +33,16 @@ class RacoonController
         header('Location: /racoon');
     }
 
-    public function show(int $id)
+    public function edit(int $id)
     {
-        echo '<h1>RacoonController</h1>';
-        echo '<h2>show</h2>';
-        echo '<p>id: ' . $id . '</p>';
+        $data = new FileWriter('racoon');
+        $racoon = $data->show($id);
+
+        return App::view('racoon/edit', [
+            'pageTitle' => 'Edit racoon',
+            'racoon' => $racoon,
+        ]);
     }
+
+
 }

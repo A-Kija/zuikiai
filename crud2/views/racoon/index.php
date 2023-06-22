@@ -5,5 +5,6 @@
 <?php foreach ($racoons as $racoon) : ?>
     <h2><?= $racoon['name'] ?></h2>
     <p><?= $racoon['description'] ?></p>
+    <a href="/racoon/edit/<?= $racoon['id'] ?>">Edit</a>
 <?php endforeach ?>
 <?php endif ?>
