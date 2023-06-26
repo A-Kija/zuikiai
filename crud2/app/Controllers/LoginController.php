@@ -4,15 +4,19 @@ namespace Colors\Controllers;
 use Colors\App;
 use Colors\FileWriter;
 use Colors\Messages;
+use Colors\OldData;
 
 class LoginController
 {
 
     public function index()
     {
+        $old = OldData::getFlashData();
+        
         return App::view('auth\index', [
             'pageTitle' => 'Login',
-            'inLogin' => true
+            'inLogin' => true,
+            'old' => $old,
         ]);
     }
 
@@ -20,6 +24,7 @@ class LoginController
     {
         $email = $data['email'] ?? '';
         $password = $data['password'] ?? '';
+        
 
         $users = (new FileWriter('users'))->showAll();
 
@@ -34,6 +39,7 @@ class LoginController
         }
 
         Messages::addMessage('danger', 'Wrong email or password');
+        OldData::flashData($data);
         header('Location: /login');
         die;
     }
