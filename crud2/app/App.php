@@ -30,9 +30,10 @@ class App {
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && count($url) == 1 && $url[0] == 'login') {
             return (new LoginController)->login($_POST);
         }
-        // if ($_SERVER['REQUEST_METHOD'] == 'GET' && count($url) == 1 && $url[0] == 'logout') {
-        //     return (new LoginController)->logout();
-        // }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && count($url) == 1 && $url[0] == 'logout') {
+            return (new LoginController)->logout($_POST);
+        }
+        // Login END
 
         // Auth middleware
         if (!isset($_SESSION['email'])) {

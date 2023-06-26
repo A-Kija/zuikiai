@@ -3,13 +3,17 @@ namespace Colors\Controllers;
 
 use Colors\App;
 use Colors\FileWriter;
+use Colors\Messages;
 
 class LoginController
 {
 
     public function index()
     {
-        return App::view('auth\index');
+        return App::view('auth\index', [
+            'pageTitle' => 'Login',
+            'inLogin' => true
+        ]);
     }
 
     public function login(array $data)
@@ -23,12 +27,13 @@ class LoginController
             if ($user['email'] == $email && $user['password'] == md5($password)) {
                 $_SESSION['email'] = $email;
                 $_SESSION['name'] = $user['name'];
-                // message('success', 'You are logged in');
+                Messages::addMessage('success', 'You are logged in');
                 header('Location: /');
                 die;
             }
         }
-        // message('danger', 'Wrong email or password');
+
+        Messages::addMessage('danger', 'Wrong email or password');
         header('Location: /login');
         die;
     }
@@ -37,6 +42,7 @@ class LoginController
     {
         unset($_SESSION['email']);
         unset($_SESSION['name']);
+        Messages::addMessage('success', 'You are logged out');
         header('Location: /');
         exit;
     }
