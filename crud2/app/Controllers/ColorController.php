@@ -15,7 +15,37 @@ class ColorController
 
     public function list()
     {
-        return json_encode(['html' => 'Hello from list']);
+
+        $colors = App::get('colors')->showAll();
+
+        $html = App::render('color/list', [
+            'colors' => $colors,
+        ]);
+
+        return App::json([
+            'html' => $html,
+            'success' => true
+        ]);
+        
+        
+    }
+
+    public function store($data)
+    {
+        App::get('colors')->create($data);
+
+        return App::json([
+            'success' => true
+        ]);
+    }
+
+    public function destroy(int $id)
+    {
+        App::get('colors')->delete($id);
+
+        return App::json([
+            'success' => true
+        ]);
     }
 
 }

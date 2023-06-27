@@ -5,17 +5,27 @@ use Colors\Controllers\RacoonController;
 use Colors\Controllers\HomeController;
 use Colors\Controllers\LoginController;
 use Colors\Controllers\ColorController;
+use Colors\FileWriter;
 
 class App {
 
+    const DB = 'file';
+
     static public function start() 
     {
-
         $url = explode('/', $_SERVER['REQUEST_URI']);
         array_shift($url);
-
         return self::router($url);
+    }
 
+    static public function get($table)
+    {
+        if (self::DB == 'file') {
+            return new FileWriter($table);
+        }
+        elseif (self::DB == 'database') {
+            return new DatabaseWriter($table);
+        }
     }
 
     static private function router($url)
@@ -74,6 +84,14 @@ class App {
         if ($_SERVER['REQUEST_METHOD'] == 'GET' && count($url) == 2 && $url[0] == 'colors' && $url[1] == 'list') {
             return (new ColorController)->list();
         }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && count($url) == 2 && $url[0] == 'colors' && $url[1] == 'store') {
+            return (new ColorController)->store(json_decode(file_get_contents('php://input'), 1));
+        }
+        if ($_SERVER['REQUEST_METHOD'] == 'DELETE' && count($url) == 2 && $url[0] == 'colors' && $url[1] == 'destroy') {
+            return (new ColorController)->destroy($url[2]);
+        }
+
+
 
 
 
@@ -99,6 +117,31 @@ class App {
         require __DIR__ . '/../views/top.php';
         require __DIR__ . '/../views/' . $path . '.php';
         require __DIR__ . '/../views/bottom.php';
+
+        return ob_get_clean();
+    }
+
+    static public function redirect($url)
+    {
+        header('Location: ' . $url);
+        // die;
+    }
+
+    static public function json($data)
+    {
+        header('Content-Type: application/json');
+        return json_encode($data);
+    }
+
+    static public function render($path, $data = null)
+    {
+        if ($data) {
+            extract($data);
+        }
+
+        ob_start();
+
+        require __DIR__ . '/../views/' . $path . '.php';
 
         return ob_get_clean();
     }

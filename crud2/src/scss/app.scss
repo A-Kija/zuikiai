@@ -1,1 +1,84 @@
 @import 'bootstrap/scss/bootstrap';
+
+
+.bin {
+    position: relative;
+
+    .color-block {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80px;
+        margin: 10px 0;
+        color: white;
+        font-size: 22px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-family: monospace;
+    }
+
+    button {
+        background: transparent;
+        border: none;
+        outline: none;
+        cursor: pointer;
+
+        position: absolute;
+        height: 32px;
+        width: 32px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        background-color: #ffffff50;
+        border-radius: 50%;
+
+        &.delete {
+            top: 10px;
+            right: 10px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+
+            &::after {
+                content: '\00D7';
+                color: crimson;
+                font-size: 30px;
+                line-height: 25px;
+                height: 30px;
+                width: 30px;
+            }
+        }
+    }
+
+    a {
+        display: block;
+        position: absolute;
+        height: 32px;
+        width: 32px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        background-color: #ffffff50;
+        border-radius: 50%;
+        text-decoration: none;
+
+        &.edit {
+            top: 10px;
+            right: 50px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+
+            &::after {
+                content: '\270E';
+                color: darkcyan;
+                font-size: 20px;
+                line-height: 25px;
+                height: 30px;
+                width: 30px;
+            }
+        }
+    }
+
+}

@@ -14,14 +14,47 @@ __webpack_require__.r(__webpack_exports__);
 
 // Server Side Rendering with JS
 
-if (document.querySelector('#colors--list')) {
-  var colorsList = document.querySelector('#colors--list');
-  axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('http://colors.test/colors/list').then(function (res) {
-    var html = res.data.html;
-    colorsList.innerHTML = html;
+var insertList = function insertList(listDom, res) {
+  var html = res.data.html;
+  listDom.innerHTML = html;
+  var deleteButtons = document.querySelectorAll('.delete--button');
+  deleteButtons.forEach(function (button) {
+    console.log(button);
+    button.addEventListener('click', function () {
+      axios__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"](button.dataset.url).then(function (res) {
+        if (res.data.success) {
+          getList(colorsList);
+        }
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    });
+  });
+};
+var getList = function getList(colorsList) {
+  axios__WEBPACK_IMPORTED_MODULE_0__["default"].get(colorsList.dataset.url).then(function (res) {
+    insertList(colorsList, res);
   })["catch"](function (err) {
     return console.log(err);
   });
+};
+if (document.querySelector('.colors--list')) {
+  var _colorsList = document.querySelector('.colors--list');
+  var createButton = document.querySelector('.create--button');
+  var createColor = document.querySelector('.create--color');
+  createButton.addEventListener('click', function () {
+    axios__WEBPACK_IMPORTED_MODULE_0__["default"].post(createButton.dataset.url, {
+      name: 'New Color',
+      hex: createColor.value
+    }).then(function (res) {
+      if (res.data.success) {
+        getList(_colorsList);
+      }
+    })["catch"](function (err) {
+      return console.log(err);
+    });
+  });
+  getList(_colorsList);
 }
 
 /***/ }),
