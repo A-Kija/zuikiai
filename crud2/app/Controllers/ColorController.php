@@ -48,4 +48,18 @@ class ColorController
         ]);
     }
 
+    public function edit(int $id)
+    {
+        $color = App::get('colors')->show($id);
+        
+        $html = App::render('color/edit', [
+            'color' => $color,
+        ]);
+
+        return App::json([
+            'html' => $html,
+            'success' => true
+        ]);
+    }
+
 }

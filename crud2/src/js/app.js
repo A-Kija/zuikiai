@@ -5,9 +5,11 @@ import axios from 'axios';
 const insertList = (listDom, res) => {
     const html = res.data.html;
     listDom.innerHTML = html;
-    const deleteButtons = document.querySelectorAll('.delete--button');
+    const deleteButtons = document.querySelectorAll('.button--delete');
+    const editButtons = document.querySelectorAll('.button--edit');
+    const colorsList = document.querySelector('.colors--list');
+    
     deleteButtons.forEach(button => {
-        console.log(button);
         button.addEventListener('click', () => {
             axios.delete(button.dataset.url)
                 .then(res => {
@@ -16,6 +18,29 @@ const insertList = (listDom, res) => {
                     }
                 })
                 .catch(err => console.log(err));
+        });
+    });
+    editButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            axios.get(button.dataset.url)
+                .then(res => {
+                    if (res.data.success) {
+                        insertEdit(res);
+                    }  
+                })
+                .catch(err => console.log(err));
+        });
+    });
+}
+
+const insertEdit = (res) => {
+    const editModal = document.querySelector('.edit--modal');
+    const html = res.data.html;
+    editModal.innerHTML = html;
+    const closeModal = document.querySelectorAll('.--close');
+    closeModal.forEach(button => {
+        button.addEventListener('click', () => {
+            editModal.innerHTML = '';
         });
     });
 }

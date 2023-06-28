@@ -17,9 +17,10 @@ __webpack_require__.r(__webpack_exports__);
 var insertList = function insertList(listDom, res) {
   var html = res.data.html;
   listDom.innerHTML = html;
-  var deleteButtons = document.querySelectorAll('.delete--button');
+  var deleteButtons = document.querySelectorAll('.button--delete');
+  var editButtons = document.querySelectorAll('.button--edit');
+  var colorsList = document.querySelector('.colors--list');
   deleteButtons.forEach(function (button) {
-    console.log(button);
     button.addEventListener('click', function () {
       axios__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"](button.dataset.url).then(function (res) {
         if (res.data.success) {
@@ -28,6 +29,28 @@ var insertList = function insertList(listDom, res) {
       })["catch"](function (err) {
         return console.log(err);
       });
+    });
+  });
+  editButtons.forEach(function (button) {
+    button.addEventListener('click', function () {
+      axios__WEBPACK_IMPORTED_MODULE_0__["default"].get(button.dataset.url).then(function (res) {
+        if (res.data.success) {
+          insertEdit(res);
+        }
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    });
+  });
+};
+var insertEdit = function insertEdit(res) {
+  var editModal = document.querySelector('.edit--modal');
+  var html = res.data.html;
+  editModal.innerHTML = html;
+  var closeModal = document.querySelectorAll('.--close');
+  closeModal.forEach(function (button) {
+    button.addEventListener('click', function () {
+      editModal.innerHTML = '';
     });
   });
 };
@@ -39,7 +62,7 @@ var getList = function getList(colorsList) {
   });
 };
 if (document.querySelector('.colors--list')) {
-  var _colorsList = document.querySelector('.colors--list');
+  var colorsList = document.querySelector('.colors--list');
   var createButton = document.querySelector('.create--button');
   var createColor = document.querySelector('.create--color');
   createButton.addEventListener('click', function () {
@@ -48,13 +71,13 @@ if (document.querySelector('.colors--list')) {
       hex: createColor.value
     }).then(function (res) {
       if (res.data.success) {
-        getList(_colorsList);
+        getList(colorsList);
       }
     })["catch"](function (err) {
       return console.log(err);
     });
   });
-  getList(_colorsList);
+  getList(colorsList);
 }
 
 /***/ }),

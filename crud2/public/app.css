@@ -12054,3 +12054,8 @@ textarea.form-control-lg {
   height: 30px;
   width: 30px;
 }
+
+.modal {
+  display: block;
+  background-color: rgba(22, 61, 179, 0.1843137255);
+}

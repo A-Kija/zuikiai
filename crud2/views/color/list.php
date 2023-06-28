@@ -10,12 +10,16 @@
             <div class="color-block" style="background:<?= $color['hex'] ?>;"><?= $color['name'] ?></div>
 
                 <button 
-                type="submit" 
+                type="button" 
                 class="button--delete delete" 
                 data-url="<?= URL ?>colors/delete/<?= $color['id'] ?>"
                 ></button>
 
-            <a href="" class="edit"></a>
+            <a 
+                class="edit button--edit"
+                data-url="<?= URL ?>colors/edit/<?= $color['id'] ?>"
+                href="#"
+                ></a>
         </div>
     </li>
 <?php endforeach ?>

@@ -87,11 +87,15 @@ class App {
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && count($url) == 2 && $url[0] == 'colors' && $url[1] == 'store') {
             return (new ColorController)->store(json_decode(file_get_contents('php://input'), 1));
         }
-        if ($_SERVER['REQUEST_METHOD'] == 'DELETE' && count($url) == 2 && $url[0] == 'colors' && $url[1] == 'destroy') {
+        if ($_SERVER['REQUEST_METHOD'] == 'DELETE' && count($url) == 3 && $url[0] == 'colors' && $url[1] == 'delete') {
             return (new ColorController)->destroy($url[2]);
         }
-
-
+        if ($_SERVER['REQUEST_METHOD'] == 'GET' && count($url) == 3 && $url[0] == 'colors' && $url[1] == 'edit') {
+            return (new ColorController)->edit($url[2]);
+        }
+        if ($_SERVER['REQUEST_METHOD'] == 'PUT' && count($url) == 3 && $url[0] == 'colors' && $url[1] == 'update') {
+            return (new ColorController)->edit($url[2], json_decode(file_get_contents('php://input'), 1));
+        }
 
 
 
