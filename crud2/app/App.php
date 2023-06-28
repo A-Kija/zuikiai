@@ -94,7 +94,7 @@ class App {
             return (new ColorController)->edit($url[2]);
         }
         if ($_SERVER['REQUEST_METHOD'] == 'PUT' && count($url) == 3 && $url[0] == 'colors' && $url[1] == 'update') {
-            return (new ColorController)->edit($url[2], json_decode(file_get_contents('php://input'), 1));
+            return (new ColorController)->update($url[2], json_decode(file_get_contents('php://input'), 1));
         }
 
 

@@ -7,7 +7,7 @@
       </div>
       <div class="modal-body">
         <label class="form-label">Color picker</label>
-        <input type="color" class="create--color form-control form-control-color" title="Choose your color" value="<?= $color['hex'] ?>">
+        <input type="color" class="edit--color form-control form-control-color" title="Choose your color" value="<?= $color['hex'] ?>">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary --close">Close</button>

@@ -62,4 +62,13 @@ class ColorController
         ]);
     }
 
+    public function update(int $id, $data)
+    {
+        App::get('colors')->update($id, $data);
+
+        return App::json([
+            'success' => true
+        ]);
+    }
+
 }

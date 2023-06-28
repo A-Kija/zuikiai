@@ -48,9 +48,24 @@ var insertEdit = function insertEdit(res) {
   var html = res.data.html;
   editModal.innerHTML = html;
   var closeModal = document.querySelectorAll('.--close');
+  var updateButton = document.querySelector('.update--button');
   closeModal.forEach(function (button) {
     button.addEventListener('click', function () {
       editModal.innerHTML = '';
+    });
+  });
+  updateButton.addEventListener('click', function () {
+    var hex = document.querySelector('.edit--color').value;
+    axios__WEBPACK_IMPORTED_MODULE_0__["default"].put(updateButton.dataset.url, {
+      name: 'New Color',
+      hex: hex
+    }).then(function (res) {
+      if (res.data.success) {
+        getList(document.querySelector('.colors--list'));
+        editModal.innerHTML = '';
+      }
+    })["catch"](function (err) {
+      return console.log(err);
     });
   });
 };
