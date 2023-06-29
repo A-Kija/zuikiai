@@ -21,6 +21,7 @@ $pdo = new PDO($dsn, $user, $pass, $options);
 $sql = "
     SELECT id, title, height, type
     FROM trees
+    ORDER BY id DESC
 ";
 
 
