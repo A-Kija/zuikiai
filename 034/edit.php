@@ -17,25 +17,27 @@ if (!empty($_POST)) {
 
     $pdo = new PDO($dsn, $user, $pass, $options);
 
+    $id = $_POST['id'] ?? 0;
     $title = $_POST['title'] ?? '';
     $height = $_POST['height'] ?? 0;
     $type = $_POST['type'] ?? 0;
 
-// INSERT INTO table_name (column1, column2, column3, ...)
-// VALUES (value1, value2, value3, ...);
+    // UPDATE table_name
+    // SET column1 = value1, column2 = value2, ...
+    // WHERE condition;
 
 
     $sql = 
         "
-        INSERT INTO trees 
-        (title, height, type)
-        VALUES (?, ?, ?)
+        UPDATE trees
+        SET title = ?, height = ?, type = ?
+        WHERE id = ?
         ";
        
     // $pdo->query($sql); // DB steitmentas
 
     $stmt = $pdo->prepare($sql);
-    $stmt->execute([$title, $height, $type]);
+    $stmt->execute([$title, $height, $type, $id]);
 
 
 
@@ -47,6 +49,7 @@ if (!empty($_POST)) {
 ?>
 
 <form action="" method="post">
+    <input type="text" name="id" placeholder="ID">
     <input type="text" name="title" placeholder="Pavadinimas">
     <input type="text" name="height" placeholder="Aukstis">
     <select name="type">
@@ -54,5 +57,5 @@ if (!empty($_POST)) {
         <option value="2">Spygliuotis</option>
         <option value="3">Palmė</option>
     </select>
-    <button type="submit">Prideti</button>  
+    <button type="submit">Redaguoti</button>  
 </form>
