@@ -10,7 +10,7 @@ use Colors\DatabaseWriter;
 
 class App {
 
-    const DB = 'file';
+    const DB = 'database';
 
     static public function start() 
     {

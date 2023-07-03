@@ -115,4 +115,22 @@ class DatabaseWriter implements DataBase
         
         return $stmt->fetchAll();
     }
+
+    public function getUserByEmailAndPass(string $email, string $password) : ?array
+    {
+        $sql = 
+        "
+        SELECT *
+        FROM {$this->tableName}
+        WHERE `email` = ?
+        AND `password` = ?
+        ";
+        
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$email, md5($password)]);
+        
+        $user = $stmt->fetch();
+        
+        return $user ? $user : null;
+    }
 }

@@ -26,17 +26,28 @@ class LoginController
         $password = $data['password'] ?? '';
         
 
-        $users = (new FileWriter('users'))->showAll();
+        // move to FileWriter
+        
 
-        foreach ($users as $user) {
-            if ($user['email'] == $email && $user['password'] == md5($password)) {
-                $_SESSION['email'] = $email;
-                $_SESSION['name'] = $user['name'];
-                Messages::addMessage('success', 'You are logged in');
-                header('Location: /');
-                die;
-            }
+        // foreach ($users as $user) {
+        //     if ($user['email'] == $email && $user['password'] == md5($password)) {
+        //         $_SESSION['email'] = $email;
+        //         $_SESSION['name'] = $user['name'];
+        //         Messages::addMessage('success', 'You are logged in');
+        //         header('Location: /');
+        //         die;
+        //     }
+        // }
+
+        $user = App::get('users')->getUserByEmailAndPass($email, $password);
+        if ($user) {
+            $_SESSION['email'] = $email;
+            $_SESSION['name'] = $user['name'];
+            Messages::addMessage('success', 'You are logged in');
+            header('Location: /');
+            die;
         }
+
 
         Messages::addMessage('danger', 'Wrong email or password');
         OldData::flashData($data);
