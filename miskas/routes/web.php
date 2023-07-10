@@ -34,6 +34,7 @@ Route::post('/calculator', [C::class, 'doCalculator'])->name('do-calculator');
 Route::prefix('colors')->name('colors-')->group(function () {
     Route::get('/', [R::class, 'index'])->name('index'); // GET /colors from URL:  colors Name: colors-index
     Route::get('/create', [R::class, 'create'])->name('create'); // GET /colors/create from URL:  colors/create Name: colors-create
+    Route::post('/', [R::class, 'store'])->name('store'); // POST /colors from URL:  colors Name: colors-store
 });
 
 

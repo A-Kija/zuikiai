@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('colors', function (Blueprint $table) {
             $table->id();
             $table->string('color', 7);
-            $table->unsignedTinyInteger('rate');
+            $table->unsignedTinyInteger('rate')->default(1);
             $table->string('author', 50);
             $table->timestamps();
         });
