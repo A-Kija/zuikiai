@@ -21,7 +21,7 @@ class ColorController extends Controller
      */
     public function create()
     {
-        //
+        return view('colors.create');
     }
 
     /**
