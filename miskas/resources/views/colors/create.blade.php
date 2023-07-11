@@ -11,15 +11,15 @@
                         <div class="mb-3">
                             <label for="exampleColorInput" class="form-label">Select color</label>
                             <input type="color" name="color" class="form-control form-control-color"
-                                id="exampleColorInput" value="#563d7c" title="Choose your color">
+                                id="exampleColorInput" value="{{old('color', '#4fa0d1')}}" title="Choose your color">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Author</label>
-                            <input name="color_author" type="text" class="form-control">
+                            <input name="color_author" type="text" class="form-control" value="{{old('color_author')}}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Rate</label>
-                            <input name="color_rate" type="number" class="form-control">
+                            <input name="color_rate" type="number" class="form-control" value="{{old('color_rate')}}">
                         </div>
                         <button type="submit" class="btn btn-primary">Add</button>
                         @csrf
