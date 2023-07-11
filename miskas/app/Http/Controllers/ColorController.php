@@ -39,7 +39,9 @@ class ColorController extends Controller
         $color->author = $request->color_author ?? 'Anonymous';
         $color->rate = $request->color_rate;
         $color->save();
-        return redirect()->route('colors-index');
+        return redirect()
+        ->route('colors-index')
+        ->with('success', 'New color has been added!');
     }
 
     /**
@@ -55,7 +57,9 @@ class ColorController extends Controller
      */
     public function edit(Color $color)
     {
-        //
+        return view('colors.edit', [
+            'color' => $color
+        ]);
     }
 
     /**
@@ -63,7 +67,21 @@ class ColorController extends Controller
      */
     public function update(Request $request, Color $color)
     {
-        //
+        $color->color = $request->color;
+        $color->author = $request->color_author ?? 'Anonymous';
+        $color->rate = $request->color_rate;
+        $color->save();
+        return redirect()
+        ->route('colors-index')
+        ->with('success', 'Color has been updated!');
+
+    }
+
+    public function delete(Color $color)
+    {
+        return view('colors.delete', [
+            'color' => $color
+        ]);
     }
 
     /**
@@ -71,6 +89,9 @@ class ColorController extends Controller
      */
     public function destroy(Color $color)
     {
-        //
+        $color->delete();
+        return redirect()
+        ->route('colors-index')
+        ->with('success', 'Color has been deleted!');
     }
 }
