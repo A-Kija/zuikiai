@@ -90,8 +90,11 @@ class ColorController extends Controller
      */
     public function edit(Color $color)
     {
+        $authors = Author::all();
+        
         return view('colors.edit', [
-            'color' => $color
+            'color' => $color,
+            'authors' => $authors
         ]);
     }
 
@@ -105,17 +108,17 @@ class ColorController extends Controller
             $request->all(),
             [
                 'color' => 'required|max:7|regex:/^#[0-9A-F]{6}$/i',
-                'color_author' => 'required|max:50|min:3|alpha',
+                'author_id' => 'required|integer',
                 'color_rate' => 'required|integer|between:1,10',
             ],
             [
                 'color.required' => 'Please enter color name!',
                 'color.max' => 'Color name is too long!',
                 'color.regex' => 'Color name must be in HEX format!',
-                'color_author.required' => 'Please enter author name!',
-                'color_author.max' => 'Author name is too long!',
-                'color_author.min' => 'Author name is too short!',
-                'color_author.alpha' => 'Author name must contain only letters!',
+                
+                'author_id.required' => 'Please select author!',
+                'author_id.integer' => 'Rate must be a number!',
+
                 'color_rate.required' => 'Please enter rate!',
                 'color_rate.integer' => 'Rate must be a number!',
                 'color_rate.between' => 'Rate must be between 1 and 10!',
@@ -128,7 +131,7 @@ class ColorController extends Controller
         
         
         $color->color = $request->color;
-        $color->author = $request->color_author ?? 'Anonymous';
+        $color->author_id = $request->author_id;
         $color->rate = $request->color_rate;
         $color->save();
         return redirect()

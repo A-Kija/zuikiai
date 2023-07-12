@@ -9,8 +9,9 @@ class Color extends Model
 {
     use HasFactory;
 
-    public function blaBla()
+    public function author()
     {
-        return $this->belongsTo(Author::class, 'author_id', 'id');
+        return $this->belongsTo(Author::class);
+        // return $this->belongsTo(Author::class, 'author_id', 'id');
     }
 }

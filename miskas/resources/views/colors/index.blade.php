@@ -16,7 +16,7 @@
                                         <div style="background-color: {{$color->color}}; width: 30px; height: 30px; border-radius: 50%;"></div>
                                         <div class="ms-2">
                                             <div>{{$color->color}}</div>
-                                            <div>{{$color->blaBla->name}}</div>
+                                            <div>{{$color->author->name}}</div>
                                             <div>Rate: {{$color->rate}}</div>
                                         </div>
                                     </div>

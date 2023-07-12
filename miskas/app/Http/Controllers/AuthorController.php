@@ -112,6 +112,10 @@ class AuthorController extends Controller
 
     public function delete(Author $author)
     {
+        if ($author->colors()->count()) {
+            return redirect()->back()->with('info', 'Can not delete author, because it has colors!');
+        }
+        
         return view('authors.delete', [
             'author' => $author
         ]);
