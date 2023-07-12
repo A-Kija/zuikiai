@@ -15,6 +15,7 @@
                                     <div class="d-flex">
                                         <div class="ms-2">
                                             <div>{{$author->name}}</div>
+                                            <div>[{{$author->colors()->count()}}]</div>
                                         </div>
                                     </div>
                                 </div>
