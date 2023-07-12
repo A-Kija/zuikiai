@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AnimalController as A;
+use App\Http\Controllers\AnimalController as An;
 use App\Http\Controllers\CalculatorController as C;
 use App\Http\Controllers\ColorController as R;
+use App\Http\Controllers\AuthorController as A;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +24,9 @@ Route::get('/', function () {
 
 // Route::get('/animals', ['App\Http\Controllers\AnimalController', 'index']);
 
-Route::get('/animals', [A::class, 'animals']);
+Route::get('/animals', [An::class, 'animals']);
 
-Route::get('/animals/racoon/{color?}', [A::class, 'racoon']);
+Route::get('/animals/racoon/{color?}', [An::class, 'racoon']);
 
 Route::get('/calculator', [C::class, 'showCalculator'])->name('calculator');
 Route::post('/calculator', [C::class, 'doCalculator'])->name('do-calculator');
@@ -40,6 +41,18 @@ Route::prefix('colors')->name('colors-')->group(function () {
     Route::delete('/{color}', [R::class, 'destroy'])->name('destroy'); // DELETE /colors/{color} from URL:  colors/{color} Name: colors-destroy 
     Route::get('/edit/{color}', [R::class, 'edit'])->name('edit'); // GET /colors/edit/{color} from URL:  colors/edit/{color} Name: colors-edit
     Route::put('/{color}', [R::class, 'update'])->name('update'); // PUT /colors/{color} from URL:  colors/{color} Name: colors-update
+
+});
+
+Route::prefix('authors')->name('authors-')->group(function () {
+
+    Route::get('/', [A::class, 'index'])->name('index');
+    Route::get('/create', [A::class, 'create'])->name('create');
+    Route::post('/', [A::class, 'store'])->name('store');
+    Route::get('/delete/{author}', [A::class, 'delete'])->name('delete');
+    Route::delete('/{author}', [A::class, 'destroy'])->name('destroy');
+    Route::get('/edit/{author}', [A::class, 'edit'])->name('edit');
+    Route::put('/{author}', [A::class, 'update'])->name('update');
 
 });
 

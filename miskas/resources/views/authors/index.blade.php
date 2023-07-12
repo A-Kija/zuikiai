@@ -6,26 +6,23 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Colors List</h5>
+                    <h5 class="card-title">Authors List</h5>
                     <ul class="list-group list-group-flush">
-                        @forelse($colors as $color)
+                        @forelse($authors as $author)
                         <li class="list-group-item">
                             <div class="d-flex justify-content-between">
                                 <div>
                                     <div class="d-flex">
-                                        <div style="background-color: {{$color->color}}; width: 30px; height: 30px; border-radius: 50%;"></div>
                                         <div class="ms-2">
-                                            <div>{{$color->color}}</div>
-                                            <div>{{$color->blaBla->name}}</div>
-                                            <div>Rate: {{$color->rate}}</div>
+                                            <div>{{$author->name}}</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div>
-                                    <a class="btn btn-success" href="{{route('colors-edit', $color)}}" >
+                                    <a class="btn btn-success" href="{{route('authors-edit', $author)}}" >
                                         Edit
                                     </a>
-                                    <a class="btn btn-danger" href="{{route('colors-delete', $color)}}" >
+                                    <a class="btn btn-danger" href="{{route('authors-delete', $author)}}" >
                                         Delete    
                                     </a>
                                 </div>
@@ -33,7 +30,7 @@
                         </li>
                         @empty
                         <li class="list-group-item">
-                            <p class="text-center">No colors</p>
+                            <p class="text-center">No authors</p>
                         </li>
                         @endforelse
                     </ul>

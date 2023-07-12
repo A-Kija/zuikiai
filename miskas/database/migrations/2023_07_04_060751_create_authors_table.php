@@ -11,14 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // color rate 1-10 author
-        
-        Schema::create('colors', function (Blueprint $table) {
+        Schema::create('authors', function (Blueprint $table) {
             $table->id();
-            $table->string('color', 7);
-            $table->unsignedTinyInteger('rate')->default(1);
-            $table->unsignedBigInteger('author_id');
-            $table->foreign('author_id')->references('id')->on('authors');
+            $table->string('name', 50);
             $table->timestamps();
         });
     }
@@ -28,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('colors');
+        Schema::dropIfExists('authors');
     }
 };
