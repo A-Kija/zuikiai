@@ -17,36 +17,51 @@ class ColorController extends Controller
         
         $sortBy = $request->sort_by ?? '';
         $orderBy = $request->order_by ?? '';
-        $filterBy = $request->filter_by ?? '';
-        $filterValue = $request->filter_value ?? '';
-
-        //filtravimas
-        $colors = match($filterBy) {
-            'rate' => Color::where('rate', '=', $filterValue),
-            default => Color::where('rate', '>', 0)
-        };
-
         if ($orderBy && !in_array($orderBy, ['asc', 'desc'])) {
             $orderBy = '';
-        } 
+        }
+        $filterBy = $request->filter_by ?? '';
+        $filterValue = $request->filter_value ?? '0';
+        $perPage = (int) $request->per_page ?? 20;
+        
+        if ($request->s) {
 
-        //rikiavimas
-        $colors = match($sortBy) {
-            'name' => $colors->orderBy('name', $orderBy),
-            'rate' => $colors->orderBy('rate', $orderBy),
-            default => $colors
-        };
+            $colors = Color::where('color', 'like', '%'.$request->s.'%')->paginate(20)->withQueryString();
+        
+        } else {
+        
+            $colors = Color::select('colors.*');
+
+            //filtravimas
+            $colors = match($filterBy) {
+                'rate' => $colors->where('rate', '=', $filterValue),
+                default => $colors
+            };
+
+            //rikiavimas
+            $colors = match($sortBy) {
+                'color' => $colors->orderBy('color', $orderBy),
+                'rate' => $colors->orderBy('rate', $orderBy),
+                default => $colors
+            };
 
 
-        $colors = $colors->get();
-        // $colors = Color::where('rate', '=', $filterValue)->$colors->orderBy('name', $orderBy)->get();
+            $colors = $colors->paginate($perPage)->withQueryString();
+
+        }
+
+       
 
 
         
         return view('colors.index', [
             'colors' => $colors,
             'sortBy' => $sortBy,
-            'orderBy' => $orderBy
+            'orderBy' => $orderBy,
+            'filterBy' => $filterBy,
+            'filterValue' => $filterValue,
+            'perPage' => $perPage,
+            's' => $request->s ?? ''
         ]);
     }
 
