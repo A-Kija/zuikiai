@@ -49,10 +49,6 @@ class ColorController extends Controller
             $colors = $colors->paginate($perPage)->withQueryString();
 
         }
-
-       
-
-
         
         return view('colors.index', [
             'colors' => $colors,
