@@ -3,6 +3,38 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
+
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="card-title">Sorts and Filters</h4>
+                    <form action="{{route('colors-index')}}" method="get">
+                        <fieldset>
+                            <legend>Sorts</legend>
+                            <div class="row">
+                                <div class="col-4">
+                                    <select class="form-select" name="sort_by" aria-label="Default select example">
+                                        <option value="rate" @if('rate' == $sortBy) selected @endif>Rate</option>
+                                        <option value="color" @if('name' == $sortBy) selected @endif>Name</option>
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    <select class="form-select" name="order_by" aria-label="Default select example">
+                                        <option value="asc" @if('asc' == $orderBy) selected @endif>ASC</option>
+                                        <option value="desc" @if('desc' == $orderBy) selected @endif>DESC</option>
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    <button type="submit" class="btn btn-primary">Sort</button>
+                                    <a class="btn btn-secondary" href="{{route('colors-index')}}">Clear</a>
+                                </div>
+                            </div>
+                        </fieldset>
+                </div>
+            </div>
+        </div>
+
+
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
