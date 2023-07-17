@@ -8,6 +8,7 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <h4 class="card-title">Sorts and Filters</h4>
+                    <a href="{{route('colors-index', ['s' => '60'])}}">Find 60% of colors</a>
                     <form action="{{route('colors-index')}}" method="get">
                         <fieldset>
                             <div class="row">

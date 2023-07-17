@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Validator;
 
 class ColorController extends Controller
 {
+    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
+    
     /**
      * Display a listing of the resource.
      */
@@ -27,6 +34,7 @@ class ColorController extends Controller
         if ($request->s) {
 
             $colors = Color::where('color', 'like', '%'.$request->s.'%')->paginate(20)->withQueryString();
+            // dump(Color::where('color', 'like', '%'.$request->s.'%')->get());
         
         } else {
         
