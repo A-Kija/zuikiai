@@ -19,7 +19,16 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div>
+                                <div class="index-buttons">
+                                    <form action={{route('authors-add-tag', $author)}} method="post">
+                                        <select name="tag_id">
+                                            @foreach($tags as $tag)
+                                            <option value="{{$tag->id}}">{{$tag->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        <button type="submit" class="btn btn-primary">Add tag</button>
+                                        @csrf
+                                    </form>
                                     <a class="btn btn-success" href="{{route('authors-edit', $author)}}" >
                                         Edit
                                     </a>

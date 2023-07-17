@@ -55,6 +55,8 @@ Route::prefix('authors')->name('authors-')->group(function () {
     Route::get('/edit/{author}', [A::class, 'edit'])->name('edit');
     Route::put('/{author}', [A::class, 'update'])->name('update');
 
+    Route::post('/tags/{author}', [A::class, 'addTag'])->name('add-tag');
+
 });
 
 Route::prefix('tags')->name('tags-')->group(function () {

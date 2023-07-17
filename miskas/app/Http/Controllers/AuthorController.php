@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Author;
+use App\Models\Tag;
+use App\Models\AuthorTag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -15,9 +17,11 @@ class AuthorController extends Controller
     {
         
         $authors = Author::all();
+        $tags = Tag::all();
         
         return view('authors.index', [
-            'authors' => $authors
+            'authors' => $authors,
+            'tags' => $tags
         ]);
     }
 
@@ -131,4 +135,15 @@ class AuthorController extends Controller
         ->route('authors-index')
         ->with('success', 'Author has been deleted!');
     }
+
+
+    public function addTag(Request $request, Author $author)
+    {
+        $authorTag = new AuthorTag;
+        $authorTag->author_id = $author->id;
+        $authorTag->tag_id = $request->tag_id;
+        $authorTag->save();
+        return redirect()->back()->with('success', 'Tag has been added!');
+    }
+
 }
