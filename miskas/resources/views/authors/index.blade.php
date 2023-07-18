@@ -14,8 +14,30 @@
                                 <div>
                                     <div class="d-flex">
                                         <div class="ms-2">
-                                            <div>{{$author->name}}</div>
-                                            <div>[{{$author->colors()->count()}}]</div>
+                                            <div><b>{{$author->name}}</b> colors: <span>[{{$author->colors()->count()}}]</span></div>
+                                            
+                                            <div class="tags-forest">
+                                                @foreach($author->tags as $tag)
+                                                <form action="{{route('authors-remove-tag', [$author, $tag])}}" method="post">
+                                                    <span class="badge bg-primary">{{$tag->name}}</span>
+                                                    <button type="submit" class="btn btn-danger btn-sm">X</button>
+                                                    @csrf
+                                                    @method('delete')
+                                                </form>
+                                                @endforeach
+                                            </div>
+                                            <div class="tag-create mt-1">
+                                                <form action="{{route('authors-create-tag', $author)}}" method="post">
+                                                    <input type="text" name="tag_name" placeholder="Tag name">
+                                                    <button type="submit" class="btn btn-primary btn-sm">Add tag</button>
+                                                    @csrf
+                                                </form>
+                                            </div>
+                                            {{-- <div>
+                                                @foreach($author->authorTags as $authorTag)
+                                                <span class="badge bg-primary">{{$authorTag->tag->name}}</span>
+                                                @endforeach
+                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>

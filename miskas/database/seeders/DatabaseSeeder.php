@@ -49,6 +49,23 @@ class DatabaseSeeder extends Seeder
 
 
 
+        foreach (range(1, 20) as $authorId) {
+
+            foreach (range(1, 30) as $tagId) {
+
+            if (!rand(0, 12)) {
+                DB::table('author_tags')->insert([
+                    'author_id' => $authorId,
+                    'tag_id' => $tagId
+                ]);
+            }
+
+        }
+
+
+        }
+
+
 
 
 

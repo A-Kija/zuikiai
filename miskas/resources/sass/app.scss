@@ -12,5 +12,36 @@ h3 {
     display: flex;
     justify-content: space-around;
     margin: 5px 0;
-    gap:5px;
+    align-items: center;
+    gap: 5px;
+
+    form {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin: 5px 0;
+        gap: 5px;
+
+        button {
+            width: 100px;
+        }
+
+    }
+}
+
+.tags-forest {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    form {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 1px;
+
+        .badge {
+            padding: 10px;
+        }
+    }
 }
