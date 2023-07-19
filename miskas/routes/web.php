@@ -47,17 +47,17 @@ Route::prefix('colors')->name('colors-')->group(function () {
 
 Route::prefix('authors')->name('authors-')->group(function () {
 
-    Route::get('/', [A::class, 'index'])->middleware(['roles:M|A'])->name('index');
-    Route::get('/create', [A::class, 'create'])->name('create');
-    Route::post('/', [A::class, 'store'])->name('store');
-    Route::get('/delete/{author}', [A::class, 'delete'])->name('delete');
-    Route::delete('/{author}', [A::class, 'destroy'])->name('destroy');
-    Route::get('/edit/{author}', [A::class, 'edit'])->name('edit');
-    Route::put('/{author}', [A::class, 'update'])->name('update');
+    Route::get('/', [A::class, 'index'])->middleware(['roles:U|M|A'])->name('index');
+    Route::get('/create', [A::class, 'create'])->middleware(['roles:A'])->name('create');
+    Route::post('/', [A::class, 'store'])->middleware(['roles:A'])->name('store');
+    Route::get('/delete/{author}', [A::class, 'delete'])->middleware(['roles:A'])->name('delete');
+    Route::delete('/{author}', [A::class, 'destroy'])->middleware(['roles:A'])->name('destroy');
+    Route::get('/edit/{author}', [A::class, 'edit'])->middleware(['roles:A'])->name('edit');
+    Route::put('/{author}', [A::class, 'update'])->middleware(['roles:A'])->name('update');
 
-    Route::post('/tags/{author}', [A::class, 'addTag'])->name('add-tag');
-    Route::delete('/tags/{author}/{tag}', [A::class, 'removeTag'])->name('remove-tag');
-    Route::post('/tags/create/{author}', [A::class, 'createTag'])->name('create-tag');
+    Route::post('/tags/{author}', [A::class, 'addTag'])->middleware(['roles:M|A'])->name('add-tag');
+    Route::delete('/tags/{author}/{tag}', [A::class, 'removeTag'])->middleware(['roles:M|A'])->name('remove-tag');
+    Route::post('/tags/create/{author}', [A::class, 'createTag'])->middleware(['roles:M|A'])->name('create-tag');
 
 });
 

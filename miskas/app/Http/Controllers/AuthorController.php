@@ -8,6 +8,7 @@ use App\Models\AuthorTag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use App\Services\RolesService;
 
 
 class AuthorController extends Controller
@@ -15,8 +16,10 @@ class AuthorController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(RolesService $service)
     {
+        
+        dump($service->kasTu);
         
         $authors = Author::all();
         $tags = Tag::all();

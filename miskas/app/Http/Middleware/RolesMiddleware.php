@@ -31,6 +31,6 @@ class RolesMiddleware
             abort(403, 'You are not allowed to access this page!');
         }
         return $next($request);
-
+        
     }
 }
