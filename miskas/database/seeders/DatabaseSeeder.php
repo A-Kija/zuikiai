@@ -20,11 +20,19 @@ class DatabaseSeeder extends Seeder
             'name' => 'Bebras',
             'email' => 'bebras@gmail.com',
             'password' => Hash::make('123'),
+            'role' => '1'
         ]);
         DB::table('users')->insert([
             'name' => 'Briedis',
             'email' => 'briedis@gmail.com',
             'password' => Hash::make('123'),
+            'role' => '100'
+        ]);
+        DB::table('users')->insert([
+            'name' => 'Barsukas',
+            'email' => 'barsukas@gmail.com',
+            'password' => Hash::make('123'),
+            'role' => '20'
         ]);
 
         foreach (range(1, 20) as $_) {

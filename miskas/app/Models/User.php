@@ -42,4 +42,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    const ROLES = [
+        0 => 'G',//'guest',
+        1 => 'U',//'user',
+        20 => 'M',//'moderator',
+        100 => 'A'//'admin',
+    ];
 }

@@ -47,7 +47,7 @@ Route::prefix('colors')->name('colors-')->group(function () {
 
 Route::prefix('authors')->name('authors-')->group(function () {
 
-    Route::get('/', [A::class, 'index'])->name('index');
+    Route::get('/', [A::class, 'index'])->middleware(['roles:M|A'])->name('index');
     Route::get('/create', [A::class, 'create'])->name('create');
     Route::post('/', [A::class, 'store'])->name('store');
     Route::get('/delete/{author}', [A::class, 'delete'])->name('delete');
