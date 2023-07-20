@@ -1,12 +1,5 @@
 import './bootstrap';
+import tags from './tags';
 
 
-const acc = {
-    b: 0,
-    c: 1,
-    d: 2,
-}
-
-const acc2 = {...acc, b: 6 + 9}
-
-// console.log(acc2);
+const t = new tags();

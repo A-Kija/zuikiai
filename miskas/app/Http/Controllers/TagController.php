@@ -22,6 +22,40 @@ class TagController extends Controller
     }
 
     /**
+     * Display tags list.
+     */
+    public function list()
+    {
+        
+        $tags = Tag::all();
+
+        $html = view('tags.list')->with(['tags' => $tags])->render();
+
+        return response()->json([
+            'html' => $html,
+            'status' => 'success'
+        ]);
+
+    }
+
+    /**
+     * Display tags list count.
+     */
+    public function count()
+    {
+        
+        $count = Tag::count();
+
+        $html = view('tags.count')->with(['count' => $count])->render();
+
+        return response()->json([
+            'html' => $html,
+            'status' => 'success'
+        ]);
+
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -112,9 +146,14 @@ class TagController extends Controller
 
     public function delete(Tag $tag)
     {
-        return view('tags.delete', [
-            'tag' => $tag
+        
+        $html = view('tags.delete')->with(['tag' => $tag])->render();
+
+        return response()->json([
+            'html' => $html,
+            'status' => 'success'
         ]);
+
     }
 
     /**
