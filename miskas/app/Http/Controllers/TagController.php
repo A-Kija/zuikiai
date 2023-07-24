@@ -26,16 +26,12 @@ class TagController extends Controller
      */
     public function list()
     {
-        
-        $tags = Tag::all();
-
+        $tags = Tag::orderBy('id', 'desc')->get();
         $html = view('tags.list')->with(['tags' => $tags])->render();
-
         return response()->json([
             'html' => $html,
             'status' => 'success'
         ]);
-
     }
 
     /**
@@ -43,32 +39,19 @@ class TagController extends Controller
      */
     public function count()
     {
-        
         $count = Tag::count();
-
         $html = view('tags.count')->with(['count' => $count])->render();
-
         return response()->json([
             'html' => $html,
             'status' => 'success'
         ]);
-
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        return view('tags.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        
         $validator = Validator::make(
             $request->all(),
             [
@@ -82,33 +65,31 @@ class TagController extends Controller
             ]);
 
         if ($validator->fails()) {
-            $request->flash();
-            return redirect()->back()->withErrors($validator);
+            return response()->json([
+            'status' => 'error',
+            'errors' => $validator->errors()->toArray()
+            ]);
         }
 
         $tag = new Tag;
         $tag->name = $request->name;
         $tag->save();
-        return redirect()
-        ->route('tags-index')
-        ->with('success', 'New tag has been added!');
+        return response()->json([
+            'status' => 'success'
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Tag $tag)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Tag $tag)
     {
-        return view('tags.edit', [
-            'tag' => $tag
+        $html = view('tags.edit')->with(['tag' => $tag])->render();
+        return response()->json([
+            'html' => $html,
+            'status' => 'success'
         ]);
     }
 
@@ -131,29 +112,30 @@ class TagController extends Controller
             ]);
 
         if ($validator->fails()) {
-            $request->flash();
-            return redirect()->back()->withErrors($validator);
+            return response()->json([
+                'status' => 'error',
+                'errors' => $validator->errors()->toArray()
+            ]);
         }
-        
         
         $tag->name = $request->name;
         $tag->save();
-        return redirect()
-        ->route('tags-index')
-        ->with('success', 'Tag has been updated!');
+        return response()->json([
+            'status' => 'success'
+        ]);
 
     }
 
+    /**
+     * Show the form for deleting the specified resource.
+     */
     public function delete(Tag $tag)
     {
-        
         $html = view('tags.delete')->with(['tag' => $tag])->render();
-
         return response()->json([
             'html' => $html,
             'status' => 'success'
         ]);
-
     }
 
     /**
@@ -162,8 +144,8 @@ class TagController extends Controller
     public function destroy(Tag $tag)
     {
         $tag->delete();
-        return redirect()
-        ->route('tags-index')
-        ->with('success', 'Tag has been deleted!');
+        return response()->json([
+            'status' => 'success'
+        ]);
     }
 }

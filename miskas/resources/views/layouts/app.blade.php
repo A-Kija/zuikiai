@@ -131,6 +131,6 @@
             @yield('content')
         </main>
     </div>
+<section id="messages"></section>
 </body>
-
 </html>

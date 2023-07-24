@@ -13,9 +13,14 @@
                         </div>
                     </div>
                     <div>
-                        <a class="btn btn-success" href="{{route('tags-edit', $tag)}}" >
-                            Edit
-                        </a>
+                        <button type="button" class="btn btn-success"
+                        data-tag-action 
+                        data-tag-action-type="load"
+                        data-url="{{route('tags-edit', $tag)}}"
+                        data-tag-target="#edit-modal"
+                        >
+                           Edit    
+                       </button>
                         <button type="button" class="btn btn-danger"
                          data-tag-action 
                          data-tag-action-type="load"

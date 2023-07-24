@@ -7,10 +7,11 @@
             @include('tags.create')
         </div>
         <div class="col-md-8" data-tag-load data-url={{route('tags-list')}}>
-            
         </div>
     </div>
 </div>
-<div class="modal" id="delete-modal"></div>
+<section id="delete-modal"></section>
+<section id="edit-modal"></section>
+
 
 @endsection
