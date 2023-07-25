@@ -66,7 +66,6 @@ export default class Tags {
     registerEvents(dom) {
         dom.querySelectorAll('[data-tag-action]').forEach(action => {
             action.addEventListener('click', _ => {
-                console.log('click', action);
                 this.handleAction(action);
             });
         });
@@ -134,9 +133,10 @@ export default class Tags {
             .then(res => {
                 this.resetData(target);
                 this.init();
+                this.m.addMessage(res.data.message);
             })
             .catch(err => {
-                console.log(err);
+                this.handleError(err);
             });
     }
 
@@ -151,6 +151,24 @@ export default class Tags {
             .catch(err => {
                 console.log(err);
             });
+    }
+
+
+    // Helpers
+    handleError(err) {
+        if (err.response) {
+            err.response.data.errors.name.forEach(error => {
+                this.m.addMessage({
+                    type: 'danger',
+                    text: error
+                });
+            });
+        } else {
+            this.m.addMessage({
+                type: 'danger',
+                text: err.message
+            });
+        }
     }
 
 

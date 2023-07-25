@@ -13,7 +13,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        
+
         $tags = Tag::all();
         
         return view('tags.index', [
@@ -55,28 +55,33 @@ class TagController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'name' => 'required|max:50|min:3|alpha',
+                'name' => 'required|unique:tags|max:50|min:3|alpha_num',
             ],
             [
                 'name.required' => 'Please enter tag name!',
                 'name.max' => 'Tag name is too long!',
                 'name.min' => 'Tag name is too short!',
-                'name.alpha' => 'Tag name must contain only letters!',
+                'name.unique' => 'Tag name must be unique!',
+                'name.alpha_num' => 'Tag name must contain only letters and numbers!',
             ]);
 
         if ($validator->fails()) {
             return response()->json([
             'status' => 'error',
             'errors' => $validator->errors()->toArray()
-            ]);
+            ], 409);
         }
 
         $tag = new Tag;
         $tag->name = $request->name;
         $tag->save();
         return response()->json([
-            'status' => 'success'
-        ]);
+            'status' => 'success',
+            'message' => [
+                'text' => 'Tag #'.$request->name.' created successfully!',
+                'type' => 'success'
+                ]
+        ], 201);
     }
 
 
