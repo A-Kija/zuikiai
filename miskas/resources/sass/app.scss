@@ -71,3 +71,32 @@ h3 {
     flex-direction: column;
     gap: 5px;
 }
+
+button {
+    span.do-loading {
+        display: none;
+    }
+    span.spinner-border {
+        display: none;
+    }
+    &:disabled {
+        span.do-loading {
+            display: inline-block;
+        }
+        span.spinner-border {
+            display: inline-block;
+        }
+        span.do-action {
+            display: none;
+        }
+    }
+}
+
+.colors-list {
+    width: 100px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}

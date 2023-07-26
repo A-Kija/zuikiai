@@ -58,25 +58,27 @@ class DatabaseSeeder extends Seeder
 
 
         foreach (range(1, 20) as $authorId) {
-
             foreach (range(1, 30) as $tagId) {
-
-            if (!rand(0, 12)) {
-                DB::table('author_tags')->insert([
-                    'author_id' => $authorId,
-                    'tag_id' => $tagId
-                ]);
+                if (!rand(0, 12)) {
+                    DB::table('author_tags')->insert([
+                        'author_id' => $authorId,
+                        'tag_id' => $tagId
+                    ]);
+                }
             }
-
         }
 
 
+        foreach (range(1, 20) as $_) {
+            $colors = [];
+            foreach (range(1, rand(2, 10)) as $_) {
+                $colors[] = $faker->hexcolor;
+            }
+            DB::table('palettes')->insert([
+                'colors' => json_encode($colors)
+            ]);
         }
-
-
-
-
-
+        
 
     }
 }

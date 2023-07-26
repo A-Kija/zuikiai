@@ -64,15 +64,14 @@ export default class Tags {
     }
 
     registerEvents(dom) {
-        dom.querySelectorAll('[data-tag-action]').forEach(action => {
-            action.addEventListener('click', _ => {
-                this.handleAction(action);
+        dom.querySelectorAll('[data-tag-action]').forEach(button => {
+            button.addEventListener('click', _ => {
+                this.handleAction(button);
             });
         });
     }
 
     handleAction(action) {
-
         switch (action.dataset.tagActionType) {
             case 'load':
                 this.handleLoad(action);
@@ -89,8 +88,6 @@ export default class Tags {
             case 'update':
                 this.handleUpdate(action);
                 break;
-
-
             default:
         }
     }
@@ -120,9 +117,10 @@ export default class Tags {
                 const target = document.querySelector(action.dataset.tagTarget);
                 target.innerHTML = '';
                 this.init();
+                this.m.addMessage(res.data.message);
             })
             .catch(err => {
-                console.log(err);
+                this.handleError(err);
             });
     }
 
@@ -143,13 +141,16 @@ export default class Tags {
     handleUpdate(action) {
         const target = document.querySelector(action.dataset.tagTarget);
         const data = this.makeData(target);
+        action.disabled = true;
         axios.put(action.dataset.url, data)
             .then(res => {
                 target.innerHTML = '';
                 this.init();
+                this.m.addMessage(res.data.message);
             })
             .catch(err => {
-                console.log(err);
+                this.handleError(err);
+                action.disabled = false;
             });
     }
 
@@ -170,6 +171,7 @@ export default class Tags {
             });
         }
     }
+
 
 
 
