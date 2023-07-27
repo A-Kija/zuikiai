@@ -6,33 +6,30 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Add new palette</h5>
-                    <form method="post" action="{{route('palettes-update', $palette)}}">
-                        <div class="mb-3">
-                            <label for="examplePaletteInput" class="form-label">Select palette</label>
-                            <input type="palette" name="palette" class="form-control form-control-palette"
-                                id="examplePaletteInput" title="Choose your palette" value="{{old('palette', $palette->palette)}}">
+                    <h5 class="card-title">Edit palette</h5>
+                    <form method="post" action="{{route('palettes-update', $palette)}}" id="palette--create--form">
+                        @foreach($palette->colors as $color)
+                        <div class="mb-3 palette-color-input">
+                            <label class="form-label">Select color</label>
+                            <input type="color" name="colors[]" class="form-control form-control-color" value="{{$color}}" title="Choose your color">
+                            <button type="button" class="btn btn-danger color--button--remove">-</button>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">Author</label>
-                            <select name="author_id" class="form-select">
-                                @foreach ($authors as $author)
-                                <option value="{{$author->id}}" @if($author->id == old('author_id', $palette->author_id)) selected @endif>{{$author->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Rate</label>
-                            <input name="palette_rate" type="number" class="form-control" value={{old('palette_rate', $palette->rate)}}>
-                        </div>
+                        @endforeach
+                        <button type="button" class="btn btn-success" id="add--color--button">+</button>
                         <button type="submit" class="btn btn-primary">Save</button>
-                        <a href="{{route('palettes-index')}}" class="btn btn-secondary">Cancel</a>
-                        @method('put')
                         @csrf
+                        @method('put')
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<section id="color--input" style="display: none;">
+    <div class="mb-3 palette-color-input">
+        <label class="form-label">Select color</label>
+        <input type="color" name="colors[]" class="form-control form-control-color" value="#ffffff" title="Choose your color">
+        <button type="button" class="btn btn-danger">-</button>
+    </div>
+</section>
 @endsection

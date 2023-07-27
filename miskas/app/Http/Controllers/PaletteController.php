@@ -28,7 +28,8 @@ class PaletteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Palette::create($request->all());
+        return redirect()->route('palettes-index');
     }
 
     /**
@@ -36,7 +37,7 @@ class PaletteController extends Controller
      */
     public function show(Palette $palette)
     {
-        //
+        
     }
 
     /**
@@ -44,7 +45,7 @@ class PaletteController extends Controller
      */
     public function edit(Palette $palette)
     {
-        //
+        return view('palettes.edit', ['palette' => $palette]);
     }
 
     /**
@@ -52,7 +53,16 @@ class PaletteController extends Controller
      */
     public function update(Request $request, Palette $palette)
     {
-        //
+        $palette->update($request->all());
+        return redirect()->route('palettes-index');
+    }
+
+    /**
+     * Confirm remove the specified resource from storage.
+     */
+    public function delete(Palette $palette)
+    {
+        return view('palettes.delete', ['palette' => $palette]);
     }
 
     /**
@@ -60,6 +70,7 @@ class PaletteController extends Controller
      */
     public function destroy(Palette $palette)
     {
-        //
+        $palette->delete();
+        return redirect()->route('palettes-index');
     }
 }
