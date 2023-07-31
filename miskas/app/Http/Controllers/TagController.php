@@ -20,6 +20,7 @@ class TagController extends Controller
             'tags' => $tags
         ]);
     }
+    
 
     /**
      * Display tags list.
