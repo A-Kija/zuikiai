@@ -3,3 +3,53 @@
     letter-spacing: 3px;
     font-family: monospace;
 }
+
+ul.netwoks  {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+    font-size: 30px;
+    font-family: monospace;
+    li {
+        cursor: pointer;
+        border: 1px solid transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        width: 60px;
+        height: 60px;
+        &.active {
+            border: 1px solid crimson;
+            color: skyblue;
+        }
+    }
+}
+
+.messages {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 100;
+    .message {
+        padding: 10px;
+        border-radius: 5px;
+        background-color: rgba(0,0,0,0.5);
+        color: white;
+        font-size: 20px;
+        font-family: monospace;
+        transition: all 0.3s ease;
+        &.success {
+            background-color: rgba(0,255,0,0.5);
+        }
+        &.error {
+            background-color: rgba(255,0,0,0.5);
+        }
+    }
+}
+

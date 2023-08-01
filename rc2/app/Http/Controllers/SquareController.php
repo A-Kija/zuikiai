@@ -9,6 +9,8 @@ class SquareController extends Controller
 {
     public function hello()
     {
+        
+        
         return Inertia::render('Hello',
         [
             'color' => 'crimson',
