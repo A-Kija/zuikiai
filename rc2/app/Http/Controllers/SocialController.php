@@ -26,7 +26,30 @@ class SocialController extends Controller
      */
     public function store(Request $request)
     {
+        
         sleep(2);
+        
+        // FAKE Validation
+        $valid = false;
+        if ($request->age < 30 && $request->social == 'tt') {
+            $valid = true;
+        }
+        else if ($request->age < 60 && $request->social == 'ig') {
+            $valid = true;
+        }
+        else if ($request->age >= 60 && $request->social == 'fb') {
+            $valid = true;
+        }
+
+        if (!$valid) {
+            return response()->json(
+                [
+                    'message' => 'Invalid social network',
+                ],
+                422
+            );
+        }
+
         $social = Social::create($request->all());
         return response()->json(
             [
@@ -51,20 +74,20 @@ class SocialController extends Controller
     }
 
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Social $social)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(lRequest $request, Social $social)
+    public function update(Request $request, Social $social)
     {
-        //
+        $social->update($request->all());
+        return response()->json(
+            [
+                'message' => 'Social updated',
+            ],
+            200
+        );
     }
 
     /**
@@ -72,6 +95,12 @@ class SocialController extends Controller
      */
     public function destroy(Social $social)
     {
-        //
+        $social->delete();
+        return response()->json(
+            [
+                'message' => 'Social deleted',
+            ],
+            200
+        );
     }
 }

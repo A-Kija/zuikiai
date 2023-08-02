@@ -4,6 +4,8 @@ import '../../sass/style.scss';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
+import Delete from '@/Social/Delete';
+import Edit from '@/Social/Edit';
 
 export default function Social({ storeUrl, listUrl }) {
 
@@ -12,6 +14,9 @@ export default function Social({ storeUrl, listUrl }) {
     const [network, setNetwork] = useState('');
     const [messages, setMessages] = useState([]);
     const [persons, setPersons] = useState(null);
+
+    const [deletePerson, setDeletePerson] = useState(null);
+    const [editPerson, setEditPerson] = useState(null);
 
     useEffect(() => {
         axios.get(listUrl)
@@ -67,7 +72,10 @@ export default function Social({ storeUrl, listUrl }) {
                 if (res.status === 201) {
                     delete person.stored;
                     person.id = res.data.id;
-                    addMessage('Person stored', 'success');
+                    addMessage(res.data.message, 'success');
+                    setName('');
+                    setAge(18);
+                    setNetwork('');
                 }
                 else {
                     setPersons(p => p.filter(p => p.id !== uuid));
@@ -75,11 +83,48 @@ export default function Social({ storeUrl, listUrl }) {
                 }
             }
             )
-            .catch(_ => {
+            .catch(e => {
                 setPersons(p => p.filter(p => p.id !== uuid));
-                addMessage('Person not stored', 'danger');
+                console.log(e);
+                addMessage(e.response.data.message, 'danger');
             }
             );
+    }
+
+    const destroy = id => {
+        setPersons(p => p.filter(p => p.id !== id));
+        setDeletePerson(null);
+        axios.delete(`${storeUrl}/${id}`)
+            .then(res => {
+                if (res.status === 200) {
+                    addMessage(res.data.message, 'success');    
+                }
+                else {
+                    addMessage('Person not deleted', 'danger');
+                }
+            })
+            .catch(e => {
+                console.log(e);
+                addMessage(e.response.data.message, 'danger');
+            }); 
+    }
+
+    const update = person => {
+        setPersons(p => p.map(p => p.id === person.id ? person : p));
+        setEditPerson(null);
+        axios.put(`${storeUrl}/${person.id}`, person)
+            .then(res => {
+                if (res.status === 200) {
+                    addMessage(res.data.message, 'success');
+                }
+                else {
+                    addMessage('Person not updated', 'danger');
+                }
+            })
+            .catch(e => {
+                console.log(e);
+                addMessage(e.response.data.message, 'danger');
+            }); 
     }
 
     return (
@@ -120,9 +165,19 @@ export default function Social({ storeUrl, listUrl }) {
                                 {
                                     persons && persons.map(person =>
                                         <li key={person.id} className="list-group-item">
+                                            <div className="left">
                                             {person.name}
                                             <span className="badge bg-primary rounded-pill">{person.age}</span>
                                             <span className="badge bg-secondary rounded-pill">{person.social}</span>
+                                            </div>
+                                            {
+                                                person.stored !== false &&
+                                                <div className="right">
+                                                    <button className="btn btn-danger btn-sm" onClick={_=> setDeletePerson(person)}>Delete</button>
+                                                    <button className="btn btn-warning btn-sm" onClick={_=> setEditPerson(person)}>Edit</button>
+                                                </div>
+                                            }
+                          
                                         </li>
                                     )
 
@@ -143,6 +198,8 @@ export default function Social({ storeUrl, listUrl }) {
                     )
                 }
             </div>
+            <Delete deletePerson={deletePerson} setDeletePerson={setDeletePerson} destroy={destroy} />
+            <Edit editPerson={editPerson} setEditPerson={setEditPerson} update={update}/>
         </div>
     );
 }

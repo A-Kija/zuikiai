@@ -53,3 +53,26 @@ ul.netwoks  {
     }
 }
 
+.list-group-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .left {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 10px;
+    }
+    .right {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 10px;
+    }
+}
+
+.modal {
+    display: block;
+    background-color: rgba(0,0,0,0.5);
+}
+
